@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Delivery app</string>
+    <string name="order_message">Ваш заказ создан!</string>
+</resources>
