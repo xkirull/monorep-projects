@@ -1,0 +1,14 @@
+C:\Users\kivah\Desktop\code\c#\taskTracker\taskTracker\bin\Debug\taskTracker.exe.config
+C:\Users\kivah\Desktop\code\c#\taskTracker\taskTracker\bin\Debug\taskTracker.exe
+C:\Users\kivah\Desktop\code\c#\taskTracker\taskTracker\bin\Debug\taskTracker.pdb
+C:\Users\kivah\Desktop\code\c#\taskTracker\taskTracker\obj\Debug\taskTracker.csproj.AssemblyReference.cache
+C:\Users\kivah\Desktop\code\c#\taskTracker\taskTracker\obj\Debug\taskTracker.csproj.SuggestedBindingRedirects.cache
+C:\Users\kivah\Desktop\code\c#\taskTracker\taskTracker\obj\Debug\taskTracker.Form1.resources
+C:\Users\kivah\Desktop\code\c#\taskTracker\taskTracker\obj\Debug\taskTracker.Properties.Resources.resources
+C:\Users\kivah\Desktop\code\c#\taskTracker\taskTracker\obj\Debug\taskTracker.csproj.GenerateResource.cache
+C:\Users\kivah\Desktop\code\c#\taskTracker\taskTracker\obj\Debug\taskTracker.csproj.CoreCompileInputs.cache
+C:\Users\kivah\Desktop\code\c#\taskTracker\taskTracker\obj\Debug\taskTracker.exe
+C:\Users\kivah\Desktop\code\c#\taskTracker\taskTracker\obj\Debug\taskTracker.pdb
+C:\Users\kivah\Desktop\code\c#\taskTracker\taskTracker\bin\Debug\Newtonsoft.Json.dll
+C:\Users\kivah\Desktop\code\c#\taskTracker\taskTracker\bin\Debug\Newtonsoft.Json.xml
+C:\Users\kivah\Desktop\code\c#\taskTracker\taskTracker\obj\Debug\taskTracker.csproj.CopyComplete
