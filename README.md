@@ -3,7 +3,7 @@
 (моб, моб, десктоп, веб, десктоп, десктоп, бд, десктоп, фигма, бд)
 1. [База данных учет движения деталей на складе](https://github.com/xkirull/monorep-projects/tree/main/inventory)
 2. [База данных Автопрокат](https://github.com/xkirull/monorep-projects/tree/main/car-rental-database)
-3. [Фигма – создать макет сайта книжный магазин]()
+3. [Фигма – создать макет сайта книжный магазин](https://www.figma.com/file/Tik9D7CwwtXlqhCqeJO4WK/BookStore-Template?node-id=0%3A1&t=br6aUcDZLvVGGE8s-1)
 4. [моб – Приложение по доставке](https://github.com/xkirull/monorep-projects/tree/main/Deliveryapp)
 5. [моб – генератор QR кодов](https://github.com/xkirull/monorep-projects/tree/main/QRCodeGenerator)
 6. [десктоп – Конвертер волют (10 волют)](https://github.com/xkirull/monorep-projects/tree/main/%D1%81urrencyConverter)
