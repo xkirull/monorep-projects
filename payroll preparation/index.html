@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЗП</title>
+</head>
+<body>
+    
+    <main>
+        <h1>Расчета заработной платы сотрудников</h1>
+        
+        <form>
+            <p>Период расчёта</p>
+            
+            <label for="first-date">Начало: </label>
+            <input id="first-date" type="date" />
+            <br />
+            
+            <label for="second-date">Конец: </label>
+            <input id="second-date" type="date" />
+            <br />
+
+            <hr />
+
+            <label for="salary">Оклад: </label>
+            <input id="salary" min="0" max="199254740991" type="number" />
+            <br />
+            <br />
+
+            <input value="Посчитать" id="button" type="submit">
+        </form>
+
+        <hr />
+
+        <h4>Расчет зарплаты:</h4>
+        Сумма зарплаты на руки: <span class="resSalary">-</span><br />
+        Сумма НДФЛ (13%): <span class="resSalary">-</span><br />
+
+        <h4>Отчисления работодателя:</h4>
+        Пенсионное (22%): <span class="resSalary">-</span><br />
+        Медицинское (5,1%): <span class="resSalary">-</span><br />
+        Социальное (2,9%): <span class="resSalary">-</span><br />
+        Отчисления в ФСС (0,2%): <span class="resSalary">-</span>
+    </main>
+
+    <script>
+
+        function isValidDate(d) {
+            return d instanceof Date && !isNaN(d);
+        }
+
+        function splitDate(startDate, endDate) {
+            const endMonth = endDate.getMonth();
+
+            const resultDates = [];
+
+            while (true) {
+                const currMonth = new Date(startDate.getTime());
+
+                const nextMonth = new Date(currMonth);
+
+                startDate.setMonth(startDate.getMonth() + 1);
+
+                nextMonth.setMonth(startDate.getMonth());
+                nextMonth.setDate(0);
+
+                resultDates.push({
+                    min: getBusinessDatesCount(currMonth, currMonth.getMonth() == endMonth ? endDate : nextMonth),
+                    max: getBusinessDatesCount(currMonth, nextMonth)
+                });
+
+                if (currMonth.getMonth() == endMonth) {
+                    break;
+                }
+            }
+
+            return resultDates;
+        }
+
+        function getBusinessDatesCount(startDate, endDate) {
+            const curDate = new Date(startDate.getTime());
+
+            let count = 0;
+
+            while (curDate <= endDate) {
+                const dayOfWeek = curDate.getDay();
+                if(dayOfWeek !== 0 && dayOfWeek !== 6) count++;
+                curDate.setDate(curDate.getDate() + 1);
+            }
+
+            return count;
+        }
+
+        const firstDate = document.getElementById("first-date");
+        const secondDate = document.getElementById("second-date");
+        const salaryInput = document.getElementById("salary");
+
+        const mainButton = document.getElementById("button");
+
+        const resultElements = new Array(...document.getElementsByClassName("resSalary"));
+
+        mainButton.onclick = (event) => {
+            event.preventDefault();
+            
+            const dateStart = new Date(firstDate.value);
+            const dateEnd = new Date(secondDate.value);
+
+            const salary = Number(salaryInput.value);
+
+            if (isNaN(salary)) {
+                console.error("Salary is not a number!");
+                return;
+            }
+
+            if (salary <= 0 || salary > 199254740991) {
+                resultElements[0].innerHTML = "-";
+                resultElements[1].innerHTML = "-";
+                resultElements[2].innerHTML = "-";
+                resultElements[3].innerHTML = "-";
+                resultElements[4].innerHTML = "-";
+                resultElements[5].innerHTML = "-";
+
+                return;
+            }
+
+            if (!isValidDate(dateStart) || !isValidDate(dateEnd)) {
+                console.error("Invalid date!");
+                return;
+            }
+
+            const resultDates = splitDate(dateStart, dateEnd);
+
+            const resultInfo = [];
+
+            resultDates.forEach(el => {
+                const resMonthZp = salary / el.max * el.min;
+                
+                const resObj = {};
+
+                resObj.ndfl = resMonthZp * 0.13;
+                resObj.zp = resMonthZp - resObj.ndfl;
+                resObj.clearZp = resMonthZp;
+
+                resObj.pension = resMonthZp * 0.22;
+                resObj.medical = resMonthZp * 0.051;
+                resObj.social = resMonthZp * 0.029;
+                resObj.injury = resMonthZp * 0.002;
+                
+                resultInfo.push(resObj); 
+            });
+
+            resultElements[0].innerHTML = Math.ceil(resultInfo.reduce((res, el) => res + el.zp, 0) * 100) / 100 || Infinity;
+            resultElements[1].innerHTML = Math.ceil(resultInfo.reduce((res, el) => res + el.ndfl, 0) * 100) / 100 || Infinity;
+            resultElements[2].innerHTML = Math.ceil(resultInfo.reduce((res, el) => res + el.pension, 0) * 100) / 100 || Infinity;
+            resultElements[3].innerHTML = Math.ceil(resultInfo.reduce((res, el) => res + el.medical, 0) * 100) / 100 || Infinity;
+            resultElements[4].innerHTML = Math.ceil(resultInfo.reduce((res, el) => res + el.social, 0) * 100) / 100 || Infinity;
+            resultElements[5].innerHTML = Math.ceil(resultInfo.reduce((res, el) => res + el.injury, 0) * 100) / 100 || Infinity;
+        }
+    </script>
+</body>
+</html>
